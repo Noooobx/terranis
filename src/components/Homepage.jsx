@@ -12,7 +12,7 @@ const Homepage = () => {
       {/* Hero Section */}
       <section className="hero-section w-full mt-12 min-h-screen flex flex-col justify-center items-center text-white py-16 px-6">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center leading-tight">
-          Welcome to <span className="text-indigo-400">Terranis25</span>
+          Welcome to <span className="text-indigo-400">teranis25</span>
         </h1>
         <p className="text-xl sm:text-2xl md:text-3xl font-light text-gray-300 mt-6 text-center max-w-3xl leading-relaxed">
           A grand celebration of innovation, technology, and creativity.

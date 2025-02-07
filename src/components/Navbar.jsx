@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Menu } from "lucide-react";
 import { Link } from "react-scroll";
+import myIcon from "./icon.png"; 
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,10 +13,15 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-950 py-4 md:px-6 fixed w-full z-50 shadow-lg">
       <div className="flex px-6 justify-between items-center max-w-7xl mx-auto">
-        <div className="text-3xl font-bold text-indigo-400">Terranis25</div>
+        <div className="text-3xl font-bold text-indigo-400  flex items-center">
+          <img className="w-12 h-12" src={myIcon} alt="Icon" />teranis
+        </div>
 
         {/* Hamburger Icon */}
-        <div className="md:hidden text-white cursor-pointer" onClick={toggleMenu}>
+        <div
+          className="md:hidden text-white cursor-pointer"
+          onClick={toggleMenu}
+        >
           <Menu size={28} />
         </div>
 
@@ -57,7 +63,12 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="hover:text-indigo-400 cursor-pointer">
-            <Link to="contact" smooth={true} duration={500} onClick={toggleMenu}>
+            <Link
+              to="contact"
+              smooth={true}
+              duration={500}
+              onClick={toggleMenu}
+            >
               Contact Us
             </Link>
           </li>

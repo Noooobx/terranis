@@ -5,7 +5,7 @@ import ParticlesComponent from "./components/ParticlesComponent";
 
 function App() {
   return (
-    <div className="app-container h-auto flex gap-4 flex-col justify-between items-center  text-white">
+    <div className="app-container h-auto flex gap-4 flex-col font-sophia justify-between items-center  text-white">
       <Navbar />
       <ParticlesComponent />
       <Homepage />
