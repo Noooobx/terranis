@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "homepage": "https://your-username.github.io/your-repo-name"
   },
   "dependencies": {
     "lucide-react": "^0.474.0",
