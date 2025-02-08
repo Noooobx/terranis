@@ -15,7 +15,7 @@ const Homepage = () => {
       {/* Hero Section */}
       <section className="hero-section w-full mt-12 min-h-screen flex flex-col justify-center items-center text-white py-16 px-6">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center leading-tight">
-          Welcome to <span className="text-indigo-400">teranis25</span>
+          Welcome to <span className="text-indigo-400">Teranis25</span>
         </h1>
         <p className="text-xl sm:text-2xl md:text-3xl font-light text-gray-300 mt-6 text-center max-w-3xl leading-relaxed">
           A grand celebration of innovation, technology, and creativity.
@@ -34,30 +34,30 @@ const Homepage = () => {
             Upcoming Events
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-3">
             {displayedEvents.map((event, index) => (
               <div
                 key={index}
-                className="bg-gray-900 md:p-8 p-4 rounded-3xl shadow-2xl flex flex-col items-center text-center"
+                className="bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700 md:p-8 p-4 rounded-3xl shadow-2xl flex flex-col items-center text-center"
               >
                 <img
                   src={event.image}
                   alt={event.title}
-                  className="w-full h-48 object-cover rounded-lg mb-6"
+                  className="w-full h-48 object-cover rounded-xl mb-6"
                 />
                 <h3 className="md:text-3xl text-xl font-bold text-indigo-400">
                   {event.title}
                 </h3>
                 <p className="text-gray-300 mt-4">Date: {event.date}</p>
-                <p className="text-gray-300">Location: {event.location}</p>
+                <p className="text-gray-300 mt-4">Venue: {event.location}</p>
                 <p className="text-gray-300 mt-4">
                   <strong>Contact:</strong> {event.contact}
                 </p>
 
-                <div className="flex flex-col sm:flex-row mt-6 space-y-4 sm:space-y-0 sm:space-x-4">
+                <div className="flex flex-wrap justify-center items-center mt-6 space-y-4 sm:space-y-0 sm:space-x-4">
                   <button
                     onClick={() => setSelectedEvent(event)}
-                    className="w-full sm:w-auto px-4 py-2 bg-white text-black rounded-lg text-sm sm:text-base hover:bg-gray-300 transition-colors"
+                    className="w-full flex items-center justify-center sm:w-auto h-8 px-4 py-2 bg-gray-800 text-white rounded-lg text-sm sm:text-base hover:bg-gray-700 transition-colors"
                   >
                     More Details
                   </button>
@@ -65,7 +65,7 @@ const Homepage = () => {
                     href={event.formLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-4 py-2 bg-gray-800 text-white rounded-lg text-sm sm:text-base hover:bg-gray-700 transition-colors"
+                    className="w-full sm:w-auto px-4 py-2 bg-white text-black rounded-lg text-sm sm:text-base hover:bg-gray-200 transition-colors"
                   >
                     Register
                   </a>
@@ -74,20 +74,20 @@ const Homepage = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="flex items-center  justify-center text-center mt-12">
             {showAll ? (
               <button
                 onClick={() => setShowAll(false)}
-                className="px-10 py-4 bg-gray-900 text-white rounded-2xl text-lg font-semibold hover:bg-white hover:text-black transition-colors"
+                className="px-10 py-4 bg-gray-900 text-white rounded-2xl text-lg font-semibold flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors"
               >
-                Show Less Events
+                <i className="fas fa-chevron-up mr-2"></i> Show Less Events
               </button>
             ) : (
               <button
                 onClick={() => setShowAll(true)}
-                className="px-10 py-4 bg-gray-900 text-white rounded-2xl text-lg font-semibold hover:bg-white hover:text-black transition-colors"
+                className="px-10 py-4 bg-gray-900 text-white rounded-2xl text-lg font-semibold flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors"
               >
-                Show More Events
+                <i className="fas fa-chevron-down mr-2"></i> Show More Events
               </button>
             )}
           </div>
@@ -132,10 +132,10 @@ const Homepage = () => {
       >
         <div className="max-w-6xl mx-auto text-center px-6">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-            About Terranis25
+            About Teranis25
           </h2>
           <p className="text-sm md:text-lg text-gray-400 mb-10 leading-relaxed">
-            Terranis25 is a grand celebration of technology and innovation,
+            Teranis25 is a grand celebration of technology and innovation,
             bringing together brilliant minds from across the region.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
@@ -160,7 +160,7 @@ const Homepage = () => {
       {/* Contact Section */}
       <section
         id="contact"
-        className="py-16 bg-gradient-to-b from-gray-900 to-black text-white flex justify-center"
+        className="py-16 bg-gradient-to-b h-screen from-gray-900 to-black text-white flex items-center justify-center"
       >
         <div className="max-w-7xl w-full mt-12 px-6">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
@@ -195,9 +195,9 @@ const Homepage = () => {
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
             <div>
-              <h3 className="text-2xl font-bold mb-4">About Terranis25</h3>
+              <h3 className="text-2xl font-bold mb-4">About Teranis</h3>
               <p className="text-gray-400 text-sm leading-relaxed">
-                Terranis25 is a grand celebration of technology and innovation,
+                teranis25 is a grand celebration of technology and innovation,
                 bringing together brilliant minds from across the region. Join
                 us for cutting-edge workshops, dynamic talks, and vibrant
                 cultural events.
