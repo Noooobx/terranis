@@ -1,15 +1,6 @@
-import React, { useState } from "react";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa";
-import events from "../utils/constants";
+import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import Events from "./Events";
 const Homepage = () => {
-  const [showAll, setShowAll] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const displayedEvents = showAll ? events : events.slice(0, 3);
   return (
     <div className="homepage text-white">
       {/* Hero Section */}
@@ -25,105 +16,7 @@ const Homepage = () => {
       </section>
 
       {/* Events Section */}
-      <section
-        id="events"
-        className="h-auto bg-gray-900 py-16 bg-opacity-80  text-white md:min-h-screen flex items-center justify-center"
-      >
-        <div className="max-w-7xl w-full mt-12 px-6">
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
-            Upcoming Events
-          </h2>
-
-          <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-3">
-            {displayedEvents.map((event, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700 md:p-8 p-4 rounded-3xl shadow-2xl flex flex-col items-center text-center"
-              >
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-48 object-cover rounded-xl mb-6"
-                />
-                <h3 className="md:text-3xl text-xl font-bold text-indigo-400">
-                  {event.title}
-                </h3>
-                <p className="text-gray-300 mt-4">Date: {event.date}</p>
-                <p className="text-gray-300 mt-4">Venue: {event.location}</p>
-                <p className="text-gray-300 mt-4">
-                  <strong>Contact:</strong> {event.contact}
-                </p>
-
-                <div className="flex flex-wrap justify-center items-center mt-6 space-y-4 sm:space-y-0 sm:space-x-4">
-                  <button
-                    onClick={() => setSelectedEvent(event)}
-                    className="w-full flex items-center justify-center sm:w-auto h-8 px-4 py-2 bg-gray-800 text-white rounded-lg text-sm sm:text-base hover:bg-gray-700 transition-colors"
-                  >
-                    More Details
-                  </button>
-                  <a
-                    href={event.formLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-4 py-2 bg-white text-black rounded-lg text-sm sm:text-base hover:bg-gray-200 transition-colors"
-                  >
-                    Register
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center  justify-center text-center mt-12">
-            {showAll ? (
-              <button
-                onClick={() => setShowAll(false)}
-                className="px-10 py-4 bg-gray-900 text-white rounded-2xl text-lg font-semibold flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors"
-              >
-                <i className="fas fa-chevron-up mr-2"></i> Show Less Events
-              </button>
-            ) : (
-              <button
-                onClick={() => setShowAll(true)}
-                className="px-10 py-4 bg-gray-900 text-white rounded-2xl text-lg font-semibold flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-colors"
-              >
-                <i className="fas fa-chevron-down mr-2"></i> Show More Events
-              </button>
-            )}
-          </div>
-
-          {/* Event Popup Modal */}
-          {selectedEvent && (
-            <div
-              className={`fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-500 ${
-                selectedEvent ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <div className="bg-gray-900 text-white w-11/12 max-w-2xl p-8 rounded-2xl relative">
-                <button
-                  onClick={() => setSelectedEvent(null)}
-                  className="absolute top-4 right-4 text-gray-500 hover:text-white text-xl font-bold"
-                >
-                  &times;
-                </button>
-                <h3 className="text-2xl font-bold mb-4 text-indigo-400">
-                  {selectedEvent.title}
-                </h3>
-                <p className="text-gray-400 mb-4">
-                  <strong>Date:</strong> {selectedEvent.date}
-                </p>
-                <p className="text-gray-400 mb-4">
-                  <strong>Location:</strong> {selectedEvent.location}
-                </p>
-                <p className="text-gray-400 mb-4">
-                  <strong>Contact:</strong> {selectedEvent.contact}
-                </p>
-                <p className="text-gray-300">{selectedEvent.description}</p>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+      <Events />
 
       {/* About Section */}
       <section
@@ -264,12 +157,10 @@ const Homepage = () => {
           <div className="border-t border-gray-700 mt-12 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
               <div className="text-lg font-semibold text-center md:text-left">
-                <p>© 2025 Terranis25. All rights reserved.</p>
+                <p>© 2025 Teranis25. All rights reserved.</p>
               </div>
               <div className="flex space-x-6 justify-center">
                 {[
-                  { icon: FaFacebookF, color: "indigo-400" },
-                  { icon: FaTwitter, color: "sky-400" },
                   { icon: FaInstagram, color: "red-400" },
                   { icon: FaLinkedinIn, color: "blue-400" },
                 ].map((social, index) => (
