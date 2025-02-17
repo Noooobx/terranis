@@ -37,7 +37,7 @@ const About = () => {
     visible: (i) => ({
       opacity: 1,
       scale: 1,
-      transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
+      transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
     }),
   };
 

@@ -1,6 +1,40 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import eventsData from "../utils/constants";
+
+const EventCard = ({ event, onSelect }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5 }}
+    whileHover={{ scale: 1.05 }}
+    className="bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700 p-6 rounded-3xl shadow-xl text-center flex flex-col items-center"
+  >
+    <img
+      src={event.image}
+      alt={event.title}
+      className="w-full h-48 object-cover rounded-xl mb-4"
+    />
+    <h4 className="text-2xl font-bold text-indigo-400">{event.title}</h4>
+    <p className="text-gray-300 mt-3">Date: {event.date}</p>
+    <p className="text-gray-300 mt-3">Venue: {event.location}</p>
+    <p className="text-gray-300 mt-3">
+      <strong>Contact:</strong> {event.contact}
+    </p>
+    <button
+      onClick={() => onSelect(event)}
+      className="mt-4 w-9/12 px-4 py-1 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition"
+    >
+      More Details
+    </button>
+    <a
+      href={event.formLink}
+      className="mt-4 px-4 w-9/12 py-1 bg-white text-black rounded-lg hover:bg-gray-200 transition block"
+    >
+      Register
+    </a>
+  </motion.div>
+);
 
 const Events = () => {
   const [expandedCategories, setExpandedCategories] = useState({});
@@ -34,7 +68,10 @@ const Events = () => {
 
         {Object.entries(eventsData).map(([category, events], index) => {
           const isExpanded = expandedCategories[category] || false;
-          const visibleEvents = isExpanded ? events : events.slice(0, 3);
+          const visibleEvents = useMemo(() => (isExpanded ? events : events.slice(0, 3)), [
+            isExpanded,
+            events,
+          ]);
 
           return (
             <motion.div
@@ -50,42 +87,7 @@ const Events = () => {
 
               <div className="grid gap-20 md:grid-cols-2 lg:grid-cols-3">
                 {visibleEvents.map((event, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700 p-6 rounded-3xl shadow-xl text-center flex flex-col items-center"
-                  >
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="w-full h-48 object-cover rounded-xl mb-4"
-                    />
-                    <h4 className="text-2xl font-bold text-indigo-400">
-                      {event.title}
-                    </h4>
-                    <p className="text-gray-300 mt-3">Date: {event.date}</p>
-                    <p className="text-gray-300 mt-3">
-                      Venue: {event.location}
-                    </p>
-                    <p className="text-gray-300 mt-3">
-                      <strong>Contact:</strong> {event.contact}
-                    </p>
-                    <button
-                      onClick={() => setSelectedEvent(event)}
-                      className="mt-4 w-9/12 px-4 py-1 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition"
-                    >
-                      More Details
-                    </button>
-                    <a
-                      href={event.formLink}
-                      className="mt-4 px-4 w-9/12 py-1 bg-white text-black rounded-lg hover:bg-gray-200 transition block"
-                    >
-                      Register
-                    </a>
-                  </motion.div>
+                  <EventCard key={i} event={event} onSelect={setSelectedEvent} />
                 ))}
               </div>
 
@@ -113,14 +115,17 @@ const Events = () => {
       <AnimatePresence>
         {selectedEvent && (
           <motion.div
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
             className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 backdrop-blur-sm"
           >
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
               className="bg-gradient-to-t from-gray-800 via-gray-900 to-black text-white w-11/12 max-w-2xl p-8 rounded-lg shadow-2xl relative"
             >
               <button
@@ -131,10 +136,14 @@ const Events = () => {
               </button>
 
               <div className="flex justify-center mb-4">
-                <img
+                <motion.img
                   src={selectedEvent.image}
                   alt={selectedEvent.title}
                   className="w-full h-48 object-cover rounded-lg shadow-lg border-2 border-indigo-500"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
                 />
               </div>
 
