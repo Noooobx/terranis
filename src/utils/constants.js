@@ -1,72 +1,73 @@
 const eventsData = {
   "Technical Events": [
-    {
-      title: "Debugging in Python",
-      date: "March 5, 2025",
-      location: "Auditorium",
-      contact: "John Doe - 9876543210",
-      formLink: "#",
-      description:
-        "Test your debugging skills by identifying and fixing errors in Python programs within a time limit.",
-      image:
-        "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg",
-    },
-    {
-      title: "Code with ChatGPT",
-      date: "April 12, 2025",
-      location: "Computer Lab",
-      contact: "Alice - 9876543211",
-      formLink: "#",
-      description:
-        "Use ChatGPT as your coding assistant to solve programming challenges efficiently.",
-      image:
-        "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg",
-    },
-    {
-      title: "Fast Coding in C",
-      date: "May 10, 2025",
-      location: "Cyber Lab",
-      contact: "David - 9876543216",
-      formLink: "#",
-      description:
-        "Showcase your speed and accuracy in writing optimized C programs under a time constraint.",
-      image:
-        "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg",
-    },
-    {
-      title: "Schrödinger's Program",
-      date: "June 1, 2025",
-      location: "Tech Park",
-      contact: "Emma - 9876543217",
-      formLink: "#",
-      description:
-        "Solve coding problems where the output isn't always predictable, testing your logical reasoning and adaptability.",
-      image:
-        "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg",
-    },
-    {
-      title: "Shuffle Code",
-      date: "July 15, 2025",
-      location: "Innovation Hub",
-      contact: "Michael - 9876543218",
-      formLink: "#",
-      description:
-        "Rearrange shuffled pieces of code into a working program within a given time frame.",
-      image:
-        "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg",
-    },
-    {
-      title: "Swap Code",
-      date: "August 20, 2025",
-      location: "Main Hall",
-      contact: "Sophia - 9876543219",
-      formLink: "#",
-      description:
-        "Write half a program and then swap with another participant to complete each other's code.",
-      image:
-        "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg",
-    },
-  ],
+  {
+    "title": "Debugging in Python",
+    "date": "March 5, 2025",
+    "location": "Auditorium",
+    "contact": "John Doe - 9876543210",
+    "formLink": "#",
+    "description":
+      "Test your debugging skills in Python! Participants will be given Python programs with bugs, and they'll need to identify and fix the errors under a strict time limit. This event will challenge your problem-solving ability and attention to detail. Prizes will be awarded for the fastest and most accurate solutions.",
+    "image":
+      "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg"
+  },
+  {
+    "title": "Code with ChatGPT",
+    "date": "April 12, 2025",
+    "location": "Computer Lab",
+    "contact": "Alice - 9876543211",
+    "formLink": "#",
+    "description":
+      "Join us for a unique coding experience where you'll use ChatGPT as your coding assistant! This event will challenge your ability to solve programming problems while leveraging AI to speed up your development process. Participants will solve a series of programming challenges, and ChatGPT will be there to guide and assist you in coding efficiently.",
+    "image":
+      "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg"
+  },
+  {
+    "title": "Fast Coding in C",
+    "date": "May 10, 2025",
+    "location": "Cyber Lab",
+    "contact": "David - 9876543216",
+    "formLink": "#",
+    "description":
+      "How fast can you code? This event is all about speed and accuracy in writing optimized C programs under a time constraint. Participants will face various challenges that require solving complex problems in the least amount of time while maintaining code efficiency. The fastest programmers with the most accurate solutions will take home the prize!",
+    "image":
+      "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg"
+  },
+  {
+    "title": "Schrödinger's Program",
+    "date": "June 1, 2025",
+    "location": "Tech Park",
+    "contact": "Emma - 9876543217",
+    "formLink": "#",
+    "description":
+      "In Schrödinger's Program, the output of the program isn't always predictable! Participants will need to solve coding problems where the expected results can vary, and you'll have to debug and test your solution in real-time. This event will test your logical reasoning, adaptability, and creativity in solving problems with multiple possible outcomes.",
+    "image":
+      "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg"
+  },
+  {
+    "title": "Shuffle Code",
+    "date": "July 15, 2025",
+    "location": "Innovation Hub",
+    "contact": "Michael - 9876543218",
+    "formLink": "#",
+    "description":
+      "In this event, participants will be provided with a set of scrambled code snippets that must be rearranged into a working program. It will test your understanding of algorithms, data structures, and your ability to quickly understand unfamiliar code. You’ll need to think critically and act fast as you race against the clock to finish the challenge.",
+    "image":
+      "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg"
+  },
+  {
+    "title": "Swap Code",
+    "date": "August 20, 2025",
+    "location": "Main Hall",
+    "contact": "Sophia - 9876543219",
+    "formLink": "#",
+    "description":
+      "Swap Code is a collaborative coding event where participants will write half of a program, and then swap their code with another participant to complete each other's programs. This event tests both your coding skills and your ability to understand and extend someone else's work. You’ll need to adapt quickly to the other participant’s coding style and complete the task as efficiently as possible.",
+    "image":
+      "https://thinkexam.com/blog/wp-content/uploads/2022/04/Coding-Hackathon_1-1.jpg"
+  }
+]
+
 //   "Inter-Department Events": [
 //     {
 //       title: "Logo Quiz (Offline)",

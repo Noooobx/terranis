@@ -13,9 +13,13 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-950 py-4 md:px-6 fixed w-full z-50 shadow-lg">
       <div className="flex px-6 justify-between items-center max-w-7xl mx-auto">
-        <div className="text-3xl font-bold text-indigo-400  flex items-center">
+        <div className="text-3xl font-bold text-indigo-400 flex items-center">
           <a href="/" className="flex items-center">
-            <img className="md:w-14 md:h-14 w-12 h-12" src={myIcon} alt="Icon" />
+            <img
+              className="md:w-14 md:h-14 w-12 h-12"
+              src={myIcon}
+              alt="Icon"
+            />
             <span className="md:text-4xl ml-2">Teranis</span>
           </a>
         </div>
@@ -45,6 +49,16 @@ const Navbar = () => {
               CONTACT US
             </Link>
           </li>
+          <li className=" cursor-pointer">
+            {/* Download Brochure link */}
+            <a
+              href="/brochure.pdf"
+              download
+              className="text-indigo-300  font-extrabold"
+            >
+              BROCHURE
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -57,12 +71,12 @@ const Navbar = () => {
         <ul className="bg-gray-950 w-full flex flex-col space-y-10 text-white py-4 text-xl items-center font-medium md:hidden shadow-[0px_10px_15px_rgba(255,255,255,0.01)]">
           <li className="hover:text-indigo-400 cursor-pointer">
             <Link to="about" smooth={true} duration={500} onClick={toggleMenu}>
-            ABOUT
+              ABOUT
             </Link>
           </li>
           <li className="hover:text-indigo-400 cursor-pointer">
             <Link to="events" smooth={true} duration={500} onClick={toggleMenu}>
-            EVENTS
+              EVENTS
             </Link>
           </li>
           <li className="hover:text-indigo-400 cursor-pointer">
@@ -74,6 +88,16 @@ const Navbar = () => {
             >
               CONTACT US
             </Link>
+          </li>
+          <li className="cursor-pointer">
+            {/* Download Brochure link */}
+            <a
+              href="/path-to-your-brochure.pdf"
+              download
+              className="text-indigo-400 hover:text-indigo-600"
+            >
+             BROCHURE
+            </a>
           </li>
         </ul>
       </div>

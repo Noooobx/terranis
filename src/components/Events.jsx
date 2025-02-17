@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import eventsData from "../utils/constants";
 
 const Events = () => {
   const [expandedCategories, setExpandedCategories] = useState({});
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const toggleExpand = (category) => {
     setExpandedCategories((prev) => ({
@@ -15,25 +19,43 @@ const Events = () => {
   return (
     <section
       id="events"
+      ref={sectionRef}
       className="h-auto bg-gray-900 py-16 bg-opacity-80 text-white flex flex-col items-center justify-center"
     >
       <div className="max-w-7xl w-full mt-16 px-6">
-        <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1 }}
+          className="text-3xl md:text-5xl font-bold text-center mb-12"
+        >
           Upcoming Events
-        </h2>
+        </motion.h2>
+
         {Object.entries(eventsData).map(([category, events], index) => {
           const isExpanded = expandedCategories[category] || false;
           const visibleEvents = isExpanded ? events : events.slice(0, 3);
 
           return (
-            <div key={index} className="my-32">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              className="my-32"
+            >
               <h3 className="text-2xl flex items-center justify-center md:text-3xl font-semibold text-indigo-400 mb-6">
                 {category}
               </h3>
-              <div className="grid  gap-20 md:grid-cols-2 lg:grid-cols-3">
+
+              <div className="grid gap-20 md:grid-cols-2 lg:grid-cols-3">
                 {visibleEvents.map((event, i) => (
-                  <div
+                  <motion.div
                     key={i}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
                     className="bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700 p-6 rounded-3xl shadow-xl text-center flex flex-col items-center"
                   >
                     <img
@@ -63,58 +85,88 @@ const Events = () => {
                     >
                       Register
                     </a>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
+
               {events.length > 3 && (
-                <div className="flex justify-center mt-6">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ duration: 1, delay: 0.2 }}
+                  className="flex justify-center mt-6"
+                >
                   <button
                     onClick={() => toggleExpand(category)}
                     className="px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-400 transition"
                   >
                     {isExpanded ? "Show Less" : "Show More"}
                   </button>
-                </div>
+                </motion.div>
               )}
-            </div>
+            </motion.div>
           );
         })}
       </div>
 
       {/* Event Details Modal */}
-      {selectedEvent && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-gray-900 text-white w-11/12 max-w-2xl p-8 rounded-2xl relative">
-            <button
-              onClick={() => setSelectedEvent(null)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-white text-xl font-bold"
+      <AnimatePresence>
+        {selectedEvent && (
+          <motion.div
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{ duration: 0.4 }}
+              className="bg-gradient-to-t from-gray-800 via-gray-900 to-black text-white w-11/12 max-w-2xl p-8 rounded-lg shadow-2xl relative"
             >
-              &times;
-            </button>
-            <img
-              src={selectedEvent.image}
-              alt={selectedEvent.title}
-              className="w-full h-64 object-cover rounded-lg mb-4"
-            />
-            <h3 className="text-2xl font-bold mb-4 text-indigo-400">
-              {selectedEvent.title}
-            </h3>
-            <p className="text-gray-400 mb-4">
-              <strong>Date:</strong> {selectedEvent.date}
-            </p>
-            <p className="text-gray-400 mb-4">
-              <strong>Location:</strong> {selectedEvent.location}
-            </p>
-            <p className="text-gray-400 mb-4">
-              <strong>Contact:</strong> {selectedEvent.contact}
-            </p>
-            <p className="text-gray-300">{selectedEvent.description}</p>
-          </div>
-        </div>
-      )}
-      <h3 className="text-center text-2xl md:text-3xl font-semibold text-white animate-pulse">
+              <button
+                onClick={() => setSelectedEvent(null)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold transition duration-300 ease-in-out"
+              >
+                &times;
+              </button>
+
+              <div className="flex justify-center mb-4">
+                <img
+                  src={selectedEvent.image}
+                  alt={selectedEvent.title}
+                  className="w-full h-48 object-cover rounded-lg shadow-lg border-2 border-indigo-500"
+                />
+              </div>
+
+              <h3 className="text-4xl font-light text-indigo-400 mb-4">
+                {selectedEvent.title}
+              </h3>
+
+              <p className="text-gray-200 leading-relaxed text-lg font-light">
+                {selectedEvent.description}
+              </p>
+
+              <div className="mt-6 flex justify-center">
+                <a
+                  href={selectedEvent.formLink}
+                  className="px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition duration-300 ease-in-out"
+                >
+                  Register Now
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.h3
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
+        className="text-center text-2xl md:text-3xl font-semibold text-white"
+      >
         More Events are Loading<span className="animate-bounce">...</span>
-      </h3>
+      </motion.h3>
     </section>
   );
 };
