@@ -8,12 +8,12 @@ const EventCard = ({ event, onSelect }) => (
     animate={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.5 }}
     whileHover={{ scale: 1.05 }}
-    className="bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700 p-6 rounded-3xl shadow-xl text-center flex flex-col items-center"
+    className="bg-gray-950 bg-opacity-50 p-6 pb-6 shadow-xl text-center flex flex-col items-center"
   >
     <img
       src={event.image}
       alt={event.title}
-      className="w-full h-48 object-cover rounded-xl mb-4"
+      className="w-full h-[28rem] object-cover  mb-12"
     />
     <h4 className="text-2xl font-bold text-indigo-400">{event.title}</h4>
     <p className="text-gray-300 mt-3">Date: {event.date}</p>
@@ -68,17 +68,17 @@ const Events = () => {
 
         {Object.entries(eventsData).map(([category, events], index) => {
           const isExpanded = expandedCategories[category] || false;
-          const visibleEvents = useMemo(() => (isExpanded ? events : events.slice(0, 3)), [
-            isExpanded,
-            events,
-          ]);
+          const visibleEvents = useMemo(
+            () => (isExpanded ? events : events.slice(0, 3)),
+            [isExpanded, events]
+          );
 
           return (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 , delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="my-32"
             >
               <h3 className="text-2xl flex items-center justify-center md:text-3xl font-semibold text-indigo-400 mb-6">
@@ -87,7 +87,11 @@ const Events = () => {
 
               <div className="grid gap-20 md:grid-cols-2 lg:grid-cols-3">
                 {visibleEvents.map((event, i) => (
-                  <EventCard key={i} event={event} onSelect={setSelectedEvent} />
+                  <EventCard
+                    key={i}
+                    event={event}
+                    onSelect={setSelectedEvent}
+                  />
                 ))}
               </div>
 
@@ -95,7 +99,7 @@ const Events = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : {}}
-                  transition={{ duration:0.5 , delay: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
                   className="flex justify-center mt-6"
                 >
                   <button
@@ -119,14 +123,14 @@ const Events = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 backdrop-blur-sm"
+            className="bg-gray-900 bg-opacity-90 fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="bg-gradient-to-t from-gray-800 via-gray-900 to-black text-white w-11/12 max-w-2xl p-8 rounded-lg shadow-2xl relative"
+              className="bg-gray-950 bg-opacity-90 text-white w-11/12 max-w-2xl p-8 rounded-lg shadow-2xl relative"
             >
               <button
                 onClick={() => setSelectedEvent(null)}
@@ -135,25 +139,46 @@ const Events = () => {
                 &times;
               </button>
 
-              <div className="flex justify-center mb-4">
-                <motion.img
-                  src={selectedEvent.image}
-                  alt={selectedEvent.title}
-                  className="w-full h-48 object-cover rounded-lg shadow-lg border-2 border-indigo-500"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                />
-              </div>
-
-              <h3 className="text-4xl font-light text-indigo-400 mb-4">
+              <h3 className="text-2xl font-light text-indigo-400 mb-4">
                 {selectedEvent.title}
               </h3>
 
-              <p className="text-gray-200 leading-relaxed text-lg font-light">
-                {selectedEvent.description}
-              </p>
+              {/* {selectedEvent.description.guidelines.map((data, index) => ( */}
+              <div className="space-y-4">
+                {/* Overview Section */}
+                <div>
+                  <h3 className="text-xl font-semibold text-white">Overview</h3>
+                  <p className="text-gray-200 leading-relaxed text-lg font-light">
+                    {selectedEvent.description.overview}
+                  </p>
+                </div>
+
+                {/* Guidelines Section */}
+                <div>
+                  <h3 className="text-xl font-semibold text-white">
+                    Guidelines
+                  </h3>
+                  <ul className="list-disc list-outside pl-5 marker:text-white text-gray-200 text-lg font-light space-y-2">
+                    {selectedEvent.description.guidelines.map((data, index) => (
+                      <li key={index}>{data}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Evaluation Criteria Section */}
+                <div>
+                  <h3 className="text-xl font-semibold text-white">
+                    Evaluation Criteria
+                  </h3>
+                  <ul className="list-disc list-outside pl-5 marker:text-white text-gray-200 text-lg font-light space-y-2">
+                    {selectedEvent.description.evaluationCriteria.map(
+                      (data, index) => (
+                        <li key={index}>{data}</li>
+                      )
+                    )}
+                  </ul>
+                </div>
+              </div>
 
               <div className="mt-6 flex justify-center">
                 <a
