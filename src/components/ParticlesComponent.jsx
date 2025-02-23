@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 
@@ -7,50 +7,54 @@ const ParticlesComponent = () => {
     loadSlim(engine);
   };
 
-  const options = {
-    background: {
-      color: "#000",
-    },
-    fullScreen: {
-      enable: true,
-      zIndex: -1,
-    },
-    particles: {
-      links: {
+  // Memoize the options object to prevent unnecessary re-renders
+  const options = useMemo(
+    () => ({
+      background: {
+        color: "#000",
+      },
+      fullScreen: {
         enable: true,
-        color: "#ffffff",
+        zIndex: -1,
       },
-      number: {
-        value: 150,
-        density: {
+      particles: {
+        links: {
           enable: true,
-          value_area: 1000,
+          color: "#ffffff",
         },
-      },
-      size: {
-        value: { min: 1, max: 3 },
-        random: true,
-      },
-      move: {
-        enable: true,
-        out_mode: "out",
-        speed: 1,
-      },
-    },
-    interactivity: {
-      events: {
-        onHover: {
+        number: {
+          value: 150,
+          density: {
+            enable: true,
+            value_area: 1000,
+          },
+        },
+        size: {
+          value: { min: 1, max: 3 },
+          random: true,
+        },
+        move: {
           enable: true,
-          mode: "repulse",
+          out_mode: "out",
+          speed: 1,
         },
       },
-      modes: {
-        repulse: {
-          distance: 100,
+      interactivity: {
+        events: {
+          onHover: {
+            enable: true,
+            mode: "repulse",
+          },
+        },
+        modes: {
+          repulse: {
+            distance: 100,
+          },
         },
       },
-    },
-  };
+    }),
+    [] // Empty dependency array ensures options are created only once
+  );
 
   return (
     <div className="w-full h-screen absolute top-0 left-0">

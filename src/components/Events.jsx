@@ -13,25 +13,21 @@ const EventCard = ({ event, onSelect }) => (
     <img
       src={event.image}
       alt={event.title}
-      className="w-full h-[28rem] object-cover  mb-12"
+      className="w-full h-[28rem] object-cover mb-12"
     />
     <h4 className="text-2xl font-bold text-indigo-400">{event.title}</h4>
-    <p className="text-gray-300 mt-3">Date: {event.date}</p>
-    <p className="text-gray-300 mt-3">Venue: {event.location}</p>
-    <p className="text-gray-300 mt-3">
-      <strong>Contact:</strong> {event.contact}
-    </p>
+
     <button
       onClick={() => onSelect(event)}
-      className="mt-4 w-9/12 px-4 py-1 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition"
+      className="mt-4 w-9/12 px-4 py-1 bg-gray-800 text-white hover:bg-gray-700 transition"
     >
       More Details
     </button>
     <a
       href={event.formLink}
-      className="mt-4 px-4 w-9/12 py-1 bg-white text-black rounded-lg hover:bg-gray-200 transition block"
+      className="mt-4 px-4 w-9/12 p-2 bg-white text-black hover:bg-gray-200 transition block"
     >
-      Register
+      REGISTER NOW
     </a>
   </motion.div>
 );
@@ -46,7 +42,7 @@ const Events = () => {
   const toggleExpand = (category) => {
     setExpandedCategories((prev) => ({
       ...prev,
-      [category]: !prev[category], // Toggle expansion state
+      [category]: !prev[category],
     }));
   };
 
@@ -61,7 +57,7 @@ const Events = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-3xl md:text-5xl font-bold text-center mb-12"
+          className="text-3xl md:text-5xl font-bold text-center"
         >
           Upcoming Events
         </motion.h2>
@@ -79,7 +75,7 @@ const Events = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="my-32"
+              className="my-12"
             >
               <h3 className="text-2xl flex items-center justify-center md:text-3xl font-semibold text-indigo-400 mb-6">
                 {category}
@@ -104,7 +100,7 @@ const Events = () => {
                 >
                   <button
                     onClick={() => toggleExpand(category)}
-                    className="px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-400 transition"
+                    className="px-6 py-2 bg-gray-200 text-black rounded-lg hover:bg-white hover:text-black transition"
                   >
                     {isExpanded ? "Show Less" : "Show More"}
                   </button>
@@ -115,7 +111,6 @@ const Events = () => {
         })}
       </div>
 
-      {/* Event Details Modal */}
       <AnimatePresence>
         {selectedEvent && (
           <motion.div
@@ -130,7 +125,7 @@ const Events = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="bg-gray-950 bg-opacity-90 text-white w-11/12 max-w-2xl p-8 rounded-lg shadow-2xl relative"
+              className="bg-gray-950 bg-opacity-90 text-white w-11/12 max-w-2xl p-8 rounded-lg shadow-2xl relative max-h-[80vh] overflow-y-auto"
             >
               <button
                 onClick={() => setSelectedEvent(null)}
@@ -143,64 +138,41 @@ const Events = () => {
                 {selectedEvent.title}
               </h3>
 
-              {/* {selectedEvent.description.guidelines.map((data, index) => ( */}
               <div className="space-y-4">
-                {/* Overview Section */}
                 <div>
                   <h3 className="text-xl font-semibold text-white">Overview</h3>
                   <p className="text-gray-200 leading-relaxed text-lg font-light">
                     {selectedEvent.description.overview}
                   </p>
                 </div>
-
-                {/* Guidelines Section */}
                 <div>
                   <h3 className="text-xl font-semibold text-white">
                     Guidelines
                   </h3>
-                  <ul className="list-disc list-outside pl-5 marker:text-white text-gray-200 text-lg font-light space-y-2">
+                  <ul className="list-disc pl-5 text-gray-200 text-lg font-light space-y-2">
                     {selectedEvent.description.guidelines.map((data, index) => (
                       <li key={index}>{data}</li>
                     ))}
                   </ul>
                 </div>
-
-                {/* Evaluation Criteria Section */}
                 <div>
-                  <h3 className="text-xl font-semibold text-white">
-                    Evaluation Criteria
-                  </h3>
-                  <ul className="list-disc list-outside pl-5 marker:text-white text-gray-200 text-lg font-light space-y-2">
-                    {selectedEvent.description.evaluationCriteria.map(
-                      (data, index) => (
-                        <li key={index}>{data}</li>
-                      )
-                    )}
+                  <h3 className="text-xl font-semibold text-white">Contact</h3>
+                  <ul className="list-none space-y-2">
+                    {selectedEvent.contact.map((data, index) => (
+                      <li
+                        key={index}
+                        className="text-gray-200 text-lg font-light"
+                      >
+                        📞 {data.name} - {data.phno}
+                      </li>
+                    ))}
                   </ul>
                 </div>
-              </div>
-
-              <div className="mt-6 flex justify-center">
-                <a
-                  href={selectedEvent.formLink}
-                  className="px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition duration-300 ease-in-out"
-                >
-                  Register Now
-                </a>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      <motion.h3
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
-        className="text-center text-2xl md:text-3xl font-semibold text-white"
-      >
-        More Events are Loading<span className="animate-bounce">...</span>
-      </motion.h3>
     </section>
   );
 };

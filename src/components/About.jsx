@@ -1,49 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
 
 const About = () => {
   const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        setInView(entry.isIntersecting); // Set inView to true when the element is in view
-      },
-      {
-        threshold: 0.2, // Trigger when 20% of the section is visible
-      }
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.2 }
     );
 
-    const element = document.getElementById("about");
-    observer.observe(element); // Observe the element
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-    return () => {
-      observer.disconnect(); // Cleanup observer when the component unmounts
-    };
+    return () => observer.disconnect();
   }, []);
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
-
-  const statVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: (i) => ({
-      opacity: 1,
-      scale: 1,
-      transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
+  const containerVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0, y: 50 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.8, ease: "easeOut" },
+      },
     }),
-  };
+    []
+  );
+
+  const statVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0, scale: 0.8 },
+      visible: (i) => ({
+        opacity: 1,
+        scale: 1,
+        transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
+      }),
+    }),
+    []
+  );
 
   return (
     <section
       id="about"
+      ref={sectionRef}
       className="flex items-center py-16 bg-gray-950 bg-opacity-80 w-screen min-h-screen text-white"
     >
       <motion.div
@@ -72,9 +74,9 @@ const About = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
           {[
-            { value: "20+", label: "Exciting Events" },
-            { value: "500+", label: "Participants" },
-            { value: "10+", label: "Workshops" },
+            { value: "25+", label: "Exciting Events" },
+            { value: "600+", label: "Attendees" },
+            { value: "₹60K+", label: "In Cash Prizes" },
           ].map((stat, index) => (
             <motion.div
               key={index}
