@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { Eye, Download } from "lucide-react";
+import Loading from "./Loading"; // Adjust the import path based on your file structure
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -43,52 +44,46 @@ const CertificateVerifier = () => {
   };
 
   return (
-    <div className="min-h-screen w-screen flex items-center mt-20 md:mt-0 justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-200 p-6">
+    <div className="min-h-screen w-screen flex items-center mt-16 md:mt-0 justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-200 p-6">
       <div className="bg-gray-900 bg-opacity-80 backdrop-blur-lg rounded-2xl p-8 w-full max-w-3xl text-center shadow-xl transform transition-all hover:shadow-2xl">
         {loading ? (
-          <div className="flex items-center justify-center gap-3 text-gray-400 animate-pulse">
-            <svg className="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8h-8z" />
-            </svg>
-            <p className="text-lg">Verifying...</p>
-          </div>
+          <Loading /> // Use the extracted Loading component
         ) : error ? (
           <p className="text-red-400 font-semibold text-lg">{error}</p>
         ) : (
-          <div className="space-y-10">
+          <div className="space-y-10  lg:mt-0">
             {/* Success Message */}
             <p className="text-xl font-semibold text-green-400 animate-fade-in">
-              ✅ {certificateData.message}
+              Valid Certificate✅
             </p>
 
             {/* User Details */}
             <div className="bg-gray-800 bg-opacity-50 backdrop-blur-md p-6 rounded-xl shadow-inner transition-all hover:bg-opacity-70">
               <h3 className="text-2xl font-semibold text-white mb-6">User Details</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-left">
-                <div className="flex items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-left">
+                <div className="flex items-center py-2">
                   <p className="text-gray-400 font-medium min-w-[100px]">Name:</p>
                   <p className="text-white ml-2 truncate">{certificateData.user_details.name}</p>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center py-2">
                   <p className="text-gray-400 font-medium min-w-[100px]">Event:</p>
-                  <p className="text-white ml-2 truncate">{certificateData.user_details.event_name}</p>
+                  <p className="text-white ml-2">{certificateData.user_details.event_name}</p>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center py-2">
                   <p className="text-gray-400 font-medium min-w-[100px]">Date:</p>
                   <p className="text-white ml-2 truncate">{certificateData.user_details.event_date}</p>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center py-2">
                   <p className="text-gray-400 font-medium min-w-[100px]">Department:</p>
                   <p className="text-white ml-2 truncate">{certificateData.user_details.department}</p>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center py-2">
                   <p className="text-gray-400 font-medium min-w-[100px]">Semester:</p>
                   <p className="text-white ml-2 truncate">{certificateData.user_details.semester}</p>
                 </div>
-                <div className="flex items-center">
-                  <p className="text-gray-400 font-medium min-w-[100px]">Email:</p>
-                  <p className="text-white ml-2 truncate">{certificateData.user_details.email}</p>
+                <div className="flex items-center py-2">
+                  <p className="text-gray-400 font-medium min-w-[100px]">Type:</p>
+                  <p className="text-white ml-2 truncate">certificate type</p>
                 </div>
               </div>
             </div>
