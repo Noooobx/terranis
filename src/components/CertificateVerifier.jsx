@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { Eye, Download } from "lucide-react";
+import { Eye, Download, AlertTriangle } from "lucide-react";
 import Loading from "./Loading"; // Adjust the import path based on your file structure
 
 const useQuery = () => {
@@ -18,7 +18,7 @@ const CertificateVerifier = () => {
 
   useEffect(() => {
     if (!ucParam || ucParam.length !== 10) {
-      setError("🚫 Invalid or missing certificate code. Please check and try again.");
+      setError("Certificate verification failed. Please check the provided code and try again.");
       setLoading(false);
       return;
     }
@@ -30,7 +30,7 @@ const CertificateVerifier = () => {
         );
         setCertificateData(response.data);
       } catch (err) {
-        setError("❌ Certificate not found. Please ensure you have entered the correct code.");
+        setError("Certificate verification failed. Please check the provided code and try again.");
       } finally {
         setLoading(false);
       }
@@ -39,22 +39,24 @@ const CertificateVerifier = () => {
     fetchCertificateInfo();
   }, [ucParam]);
 
-  const openLink = (url) => {
-    window.open(url, "_blank");
-  };
-
   return (
     <div className="min-h-screen w-screen flex items-center mt-16 md:mt-0 justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-200 p-6">
       <div className="bg-gray-900 bg-opacity-80 backdrop-blur-lg rounded-2xl p-8 w-full max-w-3xl text-center shadow-xl transform transition-all hover:shadow-2xl">
+        
         {loading ? (
-          <Loading /> // Use the extracted Loading component
+          <Loading />
         ) : error ? (
-          <p className="text-red-400 font-semibold text-lg">{error}</p>
+          <div className="bg-gray-800 bg-opacity-50 backdrop-blur-md p-6 rounded-xl shadow-inner flex flex-col items-center justify-center space-y-4">
+            <AlertTriangle className="w-12 h-12 text-red-500" />
+            <p className="text-white font-semibold text-lg">
+            Oops! Verification failed—that code looks off. Double-check and try again!
+            </p>
+          </div>
         ) : (
-          <div className="space-y-10  lg:mt-0">
+          <div className="space-y-10">
             {/* Success Message */}
             <p className="text-xl font-semibold text-green-400 animate-fade-in">
-              Valid Certificate✅
+              Valid Certificate ✅
             </p>
 
             {/* User Details */}
@@ -83,7 +85,11 @@ const CertificateVerifier = () => {
                 </div>
                 <div className="flex items-center py-2">
                   <p className="text-gray-400 font-medium min-w-[100px]">Type:</p>
-                  <p className="text-white ml-2 truncate">certificate type</p>
+                  <p className="text-white ml-2 truncate">{certificateData.user_details.type_of_certificate || ""}</p>
+                </div>
+                <div className="flex items-center py-2">
+                  <p className="text-gray-400 font-medium min-w-[100px]">Notes::</p>
+                  <p className="text-white ml-2 truncate">{certificateData.user_details.notes}</p>
                 </div>
               </div>
             </div>
@@ -92,18 +98,24 @@ const CertificateVerifier = () => {
             <div className="bg-gray-800 bg-opacity-50 backdrop-blur-md p-6 rounded-xl shadow-inner transition-all hover:bg-opacity-70">
               <h3 className="text-2xl font-semibold text-white mb-4">Certificate</h3>
               <div className="flex flex-col sm:flex-row justify-center gap-6">
-                <button
-                  onClick={() => openLink(certificateData.certificate_details.view_link)}
+                <a
+                  href={certificateData.certificate_details.view_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="View certificate in a new tab"
                   className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 active:scale-95 w-full sm:w-auto"
                 >
                   <Eye size={20} /> View
-                </button>
-                <button
-                  onClick={() => openLink(certificateData.certificate_details.download_link)}
+                </a>
+                <a
+                  href={certificateData.certificate_details.download_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Download certificate"
                   className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 active:scale-95 w-full sm:w-auto"
                 >
                   <Download size={20} /> Download
-                </button>
+                </a>
               </div>
             </div>
           </div>
