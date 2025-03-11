@@ -73,7 +73,7 @@ const CertificateVerifier = () => {
                   <p className="text-gray-400 font-medium min-w-[100px]">
                     Name:
                   </p>
-                  <p className="text-white ml-2 truncate">
+                  <p className="text-white ml-2 ">
                     {certificateData.user_details.name}
                   </p>
                 </div>
@@ -89,7 +89,7 @@ const CertificateVerifier = () => {
                   <p className="text-gray-400 font-medium min-w-[100px]">
                     Date:
                   </p>
-                  <p className="text-white ml-2 truncate">
+                  <p className="text-white ml-2 ">
                     {certificateData.user_details.event_date}
                   </p>
                 </div>
@@ -97,7 +97,7 @@ const CertificateVerifier = () => {
                   <p className="text-gray-400 font-medium min-w-[100px]">
                     Department:
                   </p>
-                  <p className="text-white ml-2 truncate">
+                  <p className="text-white ml-2 ">
                     {certificateData.user_details.department}
                   </p>
                 </div>
@@ -105,7 +105,7 @@ const CertificateVerifier = () => {
                   <p className="text-gray-400 font-medium min-w-[100px]">
                     Semester:
                   </p>
-                  <p className="text-white ml-2 truncate">
+                  <p className="text-white ml-2 ">
                     {certificateData.user_details.semester}
                   </p>
                 </div>
@@ -119,9 +119,9 @@ const CertificateVerifier = () => {
                 </div>
                 <div className="flex items-center py-2">
                   <p className="text-gray-400 font-medium min-w-[100px]">
-                    Notes::
+                    Notes:
                   </p>
-                  <p className="text-white ml-2 truncate">
+                  <p className="text-white ml-2 ">
                     {certificateData.user_details.notes}
                   </p>
                 </div>
