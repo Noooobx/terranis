@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import ParticlesComponent from "./components/ParticlesComponent";
 import LoadingScreen from "./components/LoadingScreen";
 import CertificateVerifier from "./components/CertificateVerifier"; // Import Verifier Component
+import Certificates from "./components/Certificates";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,6 +30,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="/verify" element={<CertificateVerifier />} />
+              <Route path="/certificates" element={<Certificates />} />
             </Routes>
           </>
         )}
