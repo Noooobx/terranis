@@ -1,19 +1,13 @@
-import React from "react";
+import { useEffect } from "react";
 
 const FlipbookEmbed = () => {
+  useEffect(() => {
+    window.location.href = "https://heyzine.com/flip-book/bac0f481a4.html";
+  }, []);
+
   return (
     <div className="w-full flex justify-center items-center p-4">
-      <div className="w-[90%] aspect-video shadow-xl rounded-xl overflow-hidden">
-        <iframe
-          src="https://heyzine.com/flip-book/bac0f481a4.html"
-          title="Flipbook"
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          allow="fullscreen"
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-        ></iframe>
-      </div>
+      <p>Redirecting to the flipbook...</p>
     </div>
   );
 };
