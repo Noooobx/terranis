@@ -7,6 +7,7 @@ const Homepage = () => {
   return (
     <div className="homepage text-white">
       {/* Hero Section */}
+      {/* Hero Section */}
       <section className="hero-section w-full mt-12 min-h-screen flex flex-col justify-center items-center text-white py-16 px-6">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -27,6 +28,29 @@ const Homepage = () => {
           Experience groundbreaking workshops, dynamic talks, and vibrant
           events.
         </motion.p>
+
+        {/* Buttons */}
+        {/* Buttons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="flex gap-6 mt-10 flex-wrap justify-center z-50"
+        >
+          <a
+            href="/magazine25"
+            className="bg-indigo-500 cursor-pointer hover:bg-indigo-600 text-white font-semibold py-3 px-8 rounded-full transition duration-300 shadow-lg"
+          >
+            MAGAZINE 2025
+          </a>
+          <a
+            href="/brochure.pdf"
+            download
+            className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded-full transition duration-300 shadow-lg"
+          >
+            BROCHURE
+          </a>
+        </motion.div>
       </section>
 
       {/* Events Section */}
